@@ -1,0 +1,31 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: moviewatchlist-mongo-compose
+    ports:
+      - "27017:27017"
+    volumes:
+      - movie-mongo-data:/data/db
+
+  movie-service:
+    image: moviewatchlist-movie-service:dev
+    container_name: moviewatchlist-movie-service
+    environment:
+      MONGO_URL: mongodb://mongo:27017/
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+
+  watchlist-service:
+    image: moviewatchlist-watchlist-service:dev
+    container_name: moviewatchlist-watchlist-service
+    environment:
+      MOVIE_SERVICE_URL: http://movie-service:8000
+    ports:
+      - "8001:8000"
+    depends_on:
+      - movie-service
+
+volumes:
+  movie-mongo-data:

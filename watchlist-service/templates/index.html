@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Movie Watchlist</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 40px auto;
+      }
+      form,
+      ul {
+        margin-bottom: 24px;
+      }
+      input,
+      button {
+        padding: 8px;
+      }
+      li {
+        margin-bottom: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Movie Watchlist</h1>
+
+    <h2>Movies from Movie Service</h2>
+
+    <form method="post" action="/add-movie">
+      <input name="title" placeholder="Movie title" required />
+      <input name="year" type="number" placeholder="Year" />
+      <button type="submit">Add movie</button>
+    </form>
+
+    <ul>
+      {% for movie in movies %}
+        <li>
+          {{ movie.title }}
+          {% if movie.year %} ({{ movie.year }}){% endif %}
+          — {{ "Watched" if movie.watched else "Not watched" }}
+        </li>
+      {% else %}
+        <li>No movies yet.</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
