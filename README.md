@@ -74,7 +74,7 @@ docker compose up -d
 The Movie Service is available at:
 
 ```text
-http://127.0.0.1:8000/docs
+http://127.0.0.1:8090/docs
 ```
 
 The Watchlist Service is available at:
